@@ -1,12 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalSource{
+class LocalSource {
   final SharedPreferences preferences;
 
   LocalSource(this.preferences);
 
   String loginKey = 'loginClient';
   String clientStartTime = 'startTimeKey';
+  String dateTime = 'dateTime';
 
   ///save client data
   void setClientName({required String name}) {
@@ -36,5 +37,18 @@ class LocalSource{
 
   void removeStart() {
     preferences.remove(clientStartTime);
+  }
+
+  ///save client start time
+  void saveDateTime(String date) {
+    preferences.setString(dateTime, date);
+  }
+
+  String getDateTime() {
+    return preferences.getString(dateTime) ?? '';
+  }
+
+  deleteDateTime() {
+    preferences.remove(dateTime);
   }
 }

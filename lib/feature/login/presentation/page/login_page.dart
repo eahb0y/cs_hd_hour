@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
     initController();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
@@ -86,6 +87,20 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                               : const Icon(Icons.remove_red_eye_outlined),
                         ),
                       ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      state.isSuccess
+                          ? const SizedBox()
+                          : Text(
+                        state.errorStatus ?? '',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.red,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
                     ],
                   ),
                 ),
@@ -106,8 +121,17 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    onPressed: state.enviable ? () {} : null,
-                    child: const Text("Войти"),
+                    onPressed: state.enviable
+                        ? () {
+                            context.read<LoginBloc>().add(
+                                  OnSubmitButtonEvent(
+                                    email: email.text,
+                                    password: password.text,
+                                  ),
+                                );
+                          }
+                        : null,
+                    child: state.isLoading ? CircularProgressIndicator(backgroundColor: Colors.purple.shade300, color: Colors.purple.shade100,) :  const Text("Войти"),
                   ),
                   const SizedBox(
                     height: 15,

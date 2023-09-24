@@ -25,3 +25,16 @@ class VisiblePasswordTextEvent extends LoginEvent {
   @override
   List<Object?> get props => [isVisible];
 }
+
+class OnSubmitButtonEvent extends LoginEvent {
+  final String email;
+  final String password;
+
+  const OnSubmitButtonEvent({
+    required this.password,
+    required this.email,
+  });
+
+  @override
+  List<Object?> get props => [email, password];
+}
