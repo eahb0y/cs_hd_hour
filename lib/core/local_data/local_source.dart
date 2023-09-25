@@ -48,7 +48,11 @@ class LocalSource {
     return preferences.getString(dateTime) ?? '';
   }
 
-  deleteDateTime() {
+  void deleteDateTime() {
     preferences.remove(dateTime);
+  }
+
+  bool checkDateTime(){
+    return preferences.containsKey(dateTime);
   }
 }
