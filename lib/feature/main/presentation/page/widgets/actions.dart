@@ -12,56 +12,97 @@ class ActionsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) {
-        String currentDay =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
         return Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ...switch (state) {
               MainInitial() => [
-                  IconButton(
-                    onPressed: () {
-                      context
-                          .read<MainBloc>()
-                          .add(TimerStartEvent(dateTime: currentDay));
-                      sl<LocalSource>().setStartTime(true);
-                    },
-                    icon: const Icon(Icons.play_arrow_sharp),
-                    color: Colors.purple,
-                    iconSize: 90,
-                  ),
-                  const SizedBox(
-                    height: 20,
+                  Column(
+                    children: [
+                      Text(
+                        'Запустить таймер',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Colors.purple.shade500,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          String currentDay = DateFormat('yyyy-MM-dd HH:mm:ss')
+                              .format(DateTime.now());
+                          context
+                              .read<MainBloc>()
+                              .add(TimerStartEvent(dateTime: currentDay));
+                        },
+                        icon: const Icon(Icons.play_arrow_sharp),
+                        color: Colors.purple,
+                        iconSize: 90,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
                   )
                 ],
               ClientTimerCompleted() => [
-                  IconButton(
-                    onPressed: () {
-                      context
-                          .read<MainBloc>()
-                          .add(TimerPausedEvent(dateTime: currentDay));
-                      sl<LocalSource>().removeStart();
-                    },
-                    icon: const Icon(Icons.pause_circle_filled_rounded),
-                    color: Colors.purple,
-                    iconSize: 90,
-                  ),
-                ],
-              ClientTimerDoneState() => [
-                  IconButton(
-                    onPressed: () {
-                      context
-                          .read<MainBloc>()
-                          .add(TimerStartEvent(dateTime: currentDay));
-                      sl<LocalSource>().setStartTime(true);
-                    },
-                    icon: const Icon(Icons.play_arrow_sharp),
-                    color: Colors.purple,
-                    iconSize: 90,
+                  Column(
+                    children: [
+                      Text(
+                        'Остановить таймер',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Colors.purple.shade500,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          String currentDay = DateFormat('yyyy-MM-dd HH:mm:ss')
+                              .format(DateTime.now());
+                          context
+                              .read<MainBloc>()
+                              .add(TimerPausedEvent(dateTime: currentDay));
+                          sl<LocalSource>().deleteDateTime();
+                        },
+                        icon: const Icon(Icons.pause_circle_filled_rounded),
+                        color: Colors.purple,
+                        iconSize: 90,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
+                  ),
+                ],
+              ClientTimerDoneState() => [
+                  Column(
+                    children: [
+                      Text(
+                        'Запустить таймер',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: Colors.purple.shade500,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          String currentDay = DateFormat('yyyy-MM-dd HH:mm:ss')
+                              .format(DateTime.now());
+                          context
+                              .read<MainBloc>()
+                              .add(TimerStartEvent(dateTime: currentDay));
+                        },
+                        icon: const Icon(Icons.play_arrow_sharp),
+                        color: Colors.purple,
+                        iconSize: 90,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   )
                 ]
             }

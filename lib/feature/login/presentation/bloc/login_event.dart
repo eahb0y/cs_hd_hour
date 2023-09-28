@@ -14,7 +14,10 @@ class EnviableSubmitButton extends LoginEvent {
   });
 
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [
+        email,
+        password,
+      ];
 }
 
 class VisiblePasswordTextEvent extends LoginEvent {
@@ -28,13 +31,15 @@ class VisiblePasswordTextEvent extends LoginEvent {
 
 class OnSubmitButtonEvent extends LoginEvent {
   final String email;
+  final BuildContext context;
   final String password;
 
   const OnSubmitButtonEvent({
     required this.password,
+    required this.context,
     required this.email,
   });
 
   @override
-  List<Object?> get props => [email, password];
+  List<Object?> get props => [email, password, context];
 }

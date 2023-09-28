@@ -93,14 +93,14 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                       state.isSuccess
                           ? const SizedBox()
                           : Text(
-                        state.errorStatus ?? '',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.red,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
-                      )
+                              state.errorStatus ?? '',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.red,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              textAlign: TextAlign.center,
+                            )
                     ],
                   ),
                 ),
@@ -122,16 +122,22 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
                       ),
                     ),
                     onPressed: state.enviable
-                        ? () {
+                        ? () async {
                             context.read<LoginBloc>().add(
                                   OnSubmitButtonEvent(
+                                    context: context,
                                     email: email.text,
                                     password: password.text,
                                   ),
                                 );
                           }
                         : null,
-                    child: state.isLoading ? CircularProgressIndicator(backgroundColor: Colors.purple.shade300, color: Colors.purple.shade100,) :  const Text("Войти"),
+                    child: state.isLoading
+                        ? CircularProgressIndicator(
+                            backgroundColor: Colors.purple.shade300,
+                            color: Colors.purple.shade100,
+                          )
+                        : const Text("Войти"),
                   ),
                   const SizedBox(
                     height: 15,

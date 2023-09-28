@@ -101,58 +101,50 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Время работы',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 25),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                ...switch (state) {
-                  MainInitial() => [
-                      const TimerWidget(),
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      const StartTimeWidget(startTime: '--/--'),
-                    ],
-                  ClientTimerCompleted() => [
-                      TimerWidget(
-                        statusUpdateTime:
-                            DateTime.tryParse(sl<LocalSource>().getDateTime()),
-                      ),
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      StartTimeWidget(
-                          startTime: sl<LocalSource>().getDateTime()),
-                    ],
-                  ClientTimerDoneState() => [
-                      const TimerWidget(),
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      const StartTimeWidget(startTime: '--/--'),
-                    ]
-                }
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ...switch (state) {
+                    MainInitial() => [
+                        const TimerWidget(),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const StartTimeWidget(startTime: '--/--'),
+                      ],
+                    ClientTimerCompleted() => [
+                        TimerWidget(
+                          statusUpdateTime: DateTime.tryParse(
+                              sl<LocalSource>().getDateTime()),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        StartTimeWidget(
+                            startTime: sl<LocalSource>().getDateTime()),
+                      ],
+                    ClientTimerDoneState() => [
+                        const TimerWidget(),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const StartTimeWidget(startTime: '--/--'),
+                      ]
+                  }
+                ],
+              ),
             ),
           ),
-          bottomNavigationBar: Column(
+          bottomNavigationBar: const Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Начать работу',
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    color: Colors.purple.shade500),
-              ),
-              const ActionsButton(),
-              const SizedBox(
+              ActionsButton(),
+              SizedBox(
                 height: 10,
               ),
             ],

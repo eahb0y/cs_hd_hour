@@ -1,5 +1,6 @@
 import 'package:cs_hd_hour/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:cs_hd_hour/feature/auth/presentation/page/auth_page.dart';
+import 'package:cs_hd_hour/feature/info/presentation/bloc/info_bloc.dart';
 import 'package:cs_hd_hour/feature/info/presentation/page/info_page.dart';
 import 'package:cs_hd_hour/feature/login/presentation/bloc/login_bloc.dart';
 import 'package:cs_hd_hour/feature/login/presentation/page/login_page.dart';
@@ -37,7 +38,11 @@ class Rout {
                   child: MainPage(),
                 ));
       case RoutesName.clientInfo:
-        return MaterialPageRoute(builder: (_) => const InfoPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => sl<InfoBloc>()..add(GetTimeEvent()),
+                  child: const InfoPage(),
+                ));
       default:
         throw ('The rout does not exist');
     }

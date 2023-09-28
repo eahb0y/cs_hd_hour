@@ -153,7 +153,7 @@ class _RegistrationPageState extends State<RegistrationPage> with AuthMixin {
                   ),
                 ),
                 onPressed: state.enviable
-                    ? () {
+                    ? () async {
                         context.read<AuthBloc>().add(
                               OnSubmitButtonEvent(
                                 password: password.text,
@@ -161,6 +161,9 @@ class _RegistrationPageState extends State<RegistrationPage> with AuthMixin {
                                 name: name.text,
                               ),
                             );
+                        state.isSuccess
+                            ? await Navigator.pushNamed(context, RoutesName.main)
+                            : null;
                       }
                     : null,
                 child: state.isLoading
