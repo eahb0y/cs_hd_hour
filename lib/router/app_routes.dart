@@ -40,7 +40,7 @@ class Rout {
       case RoutesName.clientInfo:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => sl<InfoBloc>()..add(GetTimeEvent()),
+                  create: (context) => sl<InfoBloc>()..add(InitialCallEvent()),
                   child: const InfoPage(),
                 ));
       default:

@@ -11,4 +11,11 @@ class Functions{
         .join(splitter);
     return isNegative ? "-$result" : result;
   }
+
+  static int hexColor(String color){
+    String newColor = '0xFF$color';
+    newColor = newColor.replaceAll('#', '');
+    int finalColor = int.parse(newColor);
+    return finalColor;
+  }
 }

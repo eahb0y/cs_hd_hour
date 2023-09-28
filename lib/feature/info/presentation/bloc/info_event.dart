@@ -2,8 +2,8 @@ part of 'info_bloc.dart';
 
 abstract class InfoEvent extends Equatable {}
 
-class GetTimeEvent extends InfoEvent{
-  GetTimeEvent();
+
+class InitialCallEvent extends InfoEvent{
   @override
   List<Object?> get props => [];
 

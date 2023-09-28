@@ -17,14 +17,19 @@ class InfoPage extends StatelessWidget {
             title: const Text('Полная информация'),
             backgroundColor: Colors.purple.shade300,
           ),
-          body: Column(
+          body: state.chartData?.isNotEmpty ?? false
+              ? Column(
             children: [
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
-              RadialBarChart(),
+              RadialBarChart(
+                  totalTime: state.totalTime ?? 0,
+                  chartData: state.chartData,
+                  leftTime: state.leftTime ?? 0,
+              ),
               const SizedBox(
-                height: 50,
+                height: 40,
               ),
               const Text(
                 'Время прихода и ухода',
@@ -34,73 +39,75 @@ class InfoPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: state.isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : Column(
-                        children: [
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              DataBox(
-                                data: 'Пришел',
-                              ),
-                              DataBox(
-                                data: 'Ушел',
-                              ),
-                            ],
-                          ),
-                          const Divider(
-                            endIndent: 32,
-                            indent: 32,
-                            color: Colors.black87,
-                            thickness: 1,
-                          ),
-                          state.timeModel?.isEmpty ?? false
-                              ? const Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      'Вы еще не начинали работу',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                )
-                              : ListView.builder(
-                                  itemCount: state.timeModel?.length ?? 0,
-                                  shrinkWrap: true,
-                                  itemBuilder: (_, index) {
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        DataBox(
-                                          data:
-                                              state.timeModel?[index].checkIn ??
-                                                  '--/--',
-                                        ),
-                                        DataBox(
-                                          data: state
-                                                  .timeModel?[index].checkOut ??
-                                              '--/--',
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                )
-                        ],
-                      ),
+                  children: [
+                    const Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                      children: [
+                        DataBox(
+                          data: 'Пришел',
+                        ),
+                        DataBox(
+                          data: 'Ушел',
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      endIndent: 32,
+                      indent: 32,
+                      color: Colors.black87,
+                      thickness: 1,
+                    ),
+                    state.timeModel?.isEmpty ?? false
+                        ? const Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Вы еще не начинали работу',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    )
+                        : ListView.builder(
+                      itemCount: state.timeModel?.length ?? 0,
+                      shrinkWrap: true,
+                      itemBuilder: (_, index) {
+                        return Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceAround,
+                          children: [
+                            DataBox(
+                              data: state.timeModel?[index]
+                                  .checkIn ??
+                                  '--/--',
+                            ),
+                            DataBox(
+                              data: state.timeModel?[index]
+                                  .checkOut ??
+                                  '--/--',
+                            ),
+                          ],
+                        );
+                      },
+                    )
+                  ],
+                ),
               )
             ],
-          ),
+          )
+              : const Center(child: CircularProgressIndicator()),
         );
       },
     );
