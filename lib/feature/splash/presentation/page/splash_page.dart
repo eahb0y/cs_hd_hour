@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
               (route) => false,
             );
           } else {
-            Navigator.of(context).pushReplacementNamed(RoutesName.login);
+            Navigator.of(context).pushReplacementNamed(RoutesName.initialPage);
           }
         }
       },

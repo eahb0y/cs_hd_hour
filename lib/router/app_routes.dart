@@ -2,6 +2,7 @@ import 'package:cs_hd_hour/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:cs_hd_hour/feature/auth/presentation/page/auth_page.dart';
 import 'package:cs_hd_hour/feature/info/presentation/bloc/info_bloc.dart';
 import 'package:cs_hd_hour/feature/info/presentation/page/info_page.dart';
+import 'package:cs_hd_hour/feature/initial_page/presentation/page/initial_page.dart';
 import 'package:cs_hd_hour/feature/login/presentation/bloc/login_bloc.dart';
 import 'package:cs_hd_hour/feature/login/presentation/page/login_page.dart';
 import 'package:cs_hd_hour/feature/main/presentation/bloc/main_bloc.dart';
@@ -19,6 +20,8 @@ class Rout {
     switch (settings.name) {
       case RoutesName.initial:
         return MaterialPageRoute(builder: (_) => const SplashPage());
+      case RoutesName.initialPage:
+        return MaterialPageRoute(builder: (_)=> const InitialPage());
       case RoutesName.login:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(

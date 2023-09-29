@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cs_hd_hour/core/theme/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TimerWidget extends StatefulWidget {
@@ -59,36 +60,42 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      padding: const EdgeInsets.all(16),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Время работы',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Время работы:',
+          style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 18,
           ),
-          const SizedBox(height: 20),
-          Center(
+        ),
+        const SizedBox(height: 20),
+        Center(
+          child: Ink(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 50,
+              vertical: 16,
+            ),
+            decoration: BoxDecoration(
+              color: LightColorTheme.timerBackGround,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: LightColorTheme.timerBorderSide,
+              ),
+            ),
             child: Text(
-              (widget.statusUpdateTime == null) ? "--/--" : timerText,
+              (widget.statusUpdateTime == null) ? "--/--/--" : timerText,
               style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
+                color: LightColorTheme.timerBorderSide,
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
               ),
             ),
           ),
-          const SizedBox(height: 20),
-        ],
-      ),
+        ),
+        const SizedBox(height: 20),
+      ],
     );
   }
 

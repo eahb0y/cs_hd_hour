@@ -1,3 +1,4 @@
+import 'package:cs_hd_hour/core/theme/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class StartTimeWidget extends StatelessWidget {
@@ -7,36 +8,40 @@ class StartTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      width: double.infinity,
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text("Начатое время",
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              )),
-          const SizedBox(height: 20),
-          Center(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text("Начало работы:",
+            style: TextStyle(
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+            )),
+        const SizedBox(height: 20),
+        Center(
+          child: Ink(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 50,
+              vertical: 16,
+            ),
+            decoration: BoxDecoration(
+              color: LightColorTheme.startTimeBackGround,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: LightColorTheme.buttonBackgroundColor,
+              ),
+            ),
             child: Text(
               '${DateTime.tryParse(startTime)?.hour ?? '--'} : ${DateTime.tryParse(startTime)?.minute ?? '--'}',
               style: const TextStyle(
-                color: Colors.black,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
+                color: LightColorTheme.buttonBackgroundColor,
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
-          const SizedBox(height: 20),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:cs_hd_hour/core/local_data/local_source.dart';
+import 'package:cs_hd_hour/core/theme/colors/app_colors.dart';
+import 'package:cs_hd_hour/core/theme/text_style/app_text_style.dart';
 import 'package:cs_hd_hour/feature/info/presentation/page/widget/timer_widget.dart';
 import 'package:cs_hd_hour/feature/main/presentation/bloc/main_bloc.dart';
 import 'package:cs_hd_hour/feature/main/presentation/page/widgets/actions.dart';
@@ -10,15 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({super.key});
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  String clientName = sl<LocalSource>().getClientName();
-
   @override
   void initState() {
     context.read<MainBloc>().add(const MainInitialCallEvent());
@@ -32,9 +32,12 @@ class _MainPageState extends State<MainPage> {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text(
-              clientName,
-              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+            title: const Text(
+              'Главная',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             backgroundColor: Colors.purple,
             leading: IconButton(
@@ -61,36 +64,66 @@ class _MainPageState extends State<MainPage> {
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Вы уверены что хотите выйти',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
+                                  const Text('Вы хотите выйти ?',
+                                      style: AppTextStyle.timeText),
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      FirebaseAuth.instance.signOut();
-                                      sl<LocalSource>().removeStart();
-                                      sl<LocalSource>().deleteData();
-                                      sl<LocalSource>().deleteDateTime();
-                                      Navigator.pushNamedAndRemoveUntil(context,
-                                          RoutesName.login, (route) => false);
-                                    },
-                                    child: const Text("Подтвердить"),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text("Отменить"),
-                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 9, horizontal: 35),
+                                            backgroundColor: LightColorTheme
+                                                .dialogCancelButton),
+                                        child: Text(
+                                          "Нет",
+                                          style: AppTextStyle.dialogButtonText
+                                              .copyWith(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 24,
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          FirebaseAuth.instance.signOut();
+                                          sl<LocalSource>().removeStart();
+                                          sl<LocalSource>().deleteData();
+                                          sl<LocalSource>().deleteDateTime();
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context,
+                                              RoutesName.initialPage,
+                                              (route) => false);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 9,
+                                              horizontal: 35,
+                                            ),
+                                            backgroundColor: LightColorTheme
+                                                .timerBorderSide),
+                                        child: Text(
+                                          "Да",
+                                          style: AppTextStyle.dialogButtonText
+                                              .copyWith(
+                                            color: LightColorTheme.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
@@ -100,54 +133,75 @@ class _MainPageState extends State<MainPage> {
               ),
             ],
           ),
-          body: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  ...switch (state) {
-                    MainInitial() => [
-                        const TimerWidget(),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        const StartTimeWidget(startTime: '--/--'),
-                      ],
-                    ClientTimerCompleted() => [
-                        TimerWidget(
-                          statusUpdateTime: DateTime.tryParse(
-                              sl<LocalSource>().getDateTime()),
-                        ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        StartTimeWidget(
-                            startTime: sl<LocalSource>().getDateTime()),
-                      ],
-                    ClientTimerDoneState() => [
-                        const TimerWidget(),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        const StartTimeWidget(startTime: '--/--'),
-                      ]
-                  }
-                ],
-              ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 15,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Привет, ${sl<LocalSource>().getClientName()}",
+                  style: AppTextStyle.helloText,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                ...switch (state) {
+                  MainInitial() => [
+                      const Column(
+                        children: [
+                          StartTimeWidget(startTime: '--/--'),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          TimerWidget(),
+                        ],
+                      )
+                    ],
+                  ClientTimerCompleted() => [
+                      Column(
+                        children: [
+                          StartTimeWidget(
+                              startTime: sl<LocalSource>().getDateTime()),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          TimerWidget(
+                            statusUpdateTime: DateTime.tryParse(
+                                sl<LocalSource>().getDateTime()),
+                          ),
+                        ],
+                      )
+                    ],
+                  ClientTimerDoneState() => [
+                      const Column(
+                        children: [
+                          StartTimeWidget(startTime: '--/--'),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          TimerWidget(),
+                        ],
+                      )
+                    ]
+                },
+                const SizedBox(
+                  height: 50,
+                )
+              ],
             ),
           ),
-          bottomNavigationBar: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ActionsButton(),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+          bottomNavigationBar: const SafeArea(
+            minimum: EdgeInsets.only(bottom: 50),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ActionsButton(),
+              ],
+            ),
           ),
         );
       },

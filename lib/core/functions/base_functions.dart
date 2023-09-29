@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart' as intl;
+import 'package:intl/intl.dart';
 class Functions{
   static String moneyFormatNoSum(num number) {
     String splitter = " ";

@@ -1,4 +1,5 @@
 import 'package:cs_hd_hour/core/local_data/local_source.dart';
+import 'package:cs_hd_hour/core/theme/colors/app_colors.dart';
 import 'package:cs_hd_hour/feature/main/presentation/bloc/main_bloc.dart';
 import 'package:cs_hd_hour/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -20,13 +21,16 @@ class ActionsButton extends StatelessWidget {
               MainInitial() => [
                   Column(
                     children: [
-                      Text(
-                        'Запустить таймер',
+                      const Text(
+                        'Начать работу',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                           fontSize: 20,
-                          color: Colors.purple.shade500,
+                          color: LightColorTheme.buttonBackgroundColor,
                         ),
+                      ),
+                      const SizedBox(
+                        height: 24,
                       ),
                       IconButton(
                         onPressed: () {
@@ -40,9 +44,6 @@ class ActionsButton extends StatelessWidget {
                         color: Colors.purple,
                         iconSize: 90,
                       ),
-                      const SizedBox(
-                        height: 20,
-                      )
                     ],
                   )
                 ],
@@ -50,12 +51,15 @@ class ActionsButton extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        'Остановить таймер',
+                        'Остоновить',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
                           color: Colors.purple.shade500,
                         ),
+                      ),
+                      const SizedBox(
+                        height: 24,
                       ),
                       IconButton(
                         onPressed: () {
@@ -72,20 +76,20 @@ class ActionsButton extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                 ],
               ClientTimerDoneState() => [
                   Column(
                     children: [
                       Text(
-                        'Запустить таймер',
+                        'Начать работу',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                           fontSize: 20,
                           color: Colors.purple.shade500,
                         ),
+                      ),
+                      const SizedBox(
+                        height: 24,
                       ),
                       IconButton(
                         onPressed: () {
@@ -98,9 +102,6 @@ class ActionsButton extends StatelessWidget {
                         icon: const Icon(Icons.play_arrow_sharp),
                         color: Colors.purple,
                         iconSize: 90,
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
                     ],
                   )
