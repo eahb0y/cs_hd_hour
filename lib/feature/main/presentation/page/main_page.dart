@@ -34,10 +34,7 @@ class _MainPageState extends State<MainPage> {
             centerTitle: true,
             title: const Text(
               'Главная',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-              ),
+              style: AppTextStyle.appBarText,
             ),
             backgroundColor: Colors.purple,
             leading: IconButton(
@@ -81,8 +78,10 @@ class _MainPageState extends State<MainPage> {
                                           Navigator.pop(context);
                                         },
                                         style: ElevatedButton.styleFrom(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 9, horizontal: 35),
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 9,
+                                              horizontal: 35,
+                                            ),
                                             backgroundColor: LightColorTheme
                                                 .dialogCancelButton),
                                         child: Text(

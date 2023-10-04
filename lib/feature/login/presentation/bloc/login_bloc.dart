@@ -64,7 +64,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } catch (e){
       throw ' exsecpion ${e.toString()}';
     }
-    print('dadasda, ${state.isSuccess}');
   }
 
   Future<void> _setUser(String email) async {

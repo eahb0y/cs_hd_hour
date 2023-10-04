@@ -32,10 +32,3 @@ class TimerPausedEvent extends MainEvent {
   @override
   List<Object?> get props => [dateTime];
 }
-
-class GetTimerTimeEvent extends MainEvent {
-  const GetTimerTimeEvent();
-
-  @override
-  List<Object?> get props => [];
-}

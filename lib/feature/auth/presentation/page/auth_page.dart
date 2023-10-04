@@ -60,12 +60,12 @@ class _RegistrationPageState extends State<RegistrationPage> with AuthMixin {
                         hintText: "Name",
                         onTextChange: (value) {
                           context.read<AuthBloc>().add(
-                            EnviableSubmitButton(
-                              email: email.text,
-                              name: value,
-                              password: password.text,
-                            ),
-                          );
+                                EnviableSubmitButton(
+                                  email: email.text,
+                                  name: value,
+                                  password: password.text,
+                                ),
+                              );
                         },
                       ),
                       const SizedBox(
@@ -76,12 +76,12 @@ class _RegistrationPageState extends State<RegistrationPage> with AuthMixin {
                         hintText: "Email",
                         onTextChange: (value) {
                           context.read<AuthBloc>().add(
-                            EnviableSubmitButton(
-                              email: value,
-                              name: name.text,
-                              password: password.text,
-                            ),
-                          );
+                                EnviableSubmitButton(
+                                  email: value,
+                                  name: name.text,
+                                  password: password.text,
+                                ),
+                              );
                         },
                       ),
                       const SizedBox(
@@ -113,14 +113,14 @@ class _RegistrationPageState extends State<RegistrationPage> with AuthMixin {
                       state.isSuccess
                           ? const SizedBox()
                           : Text(
-                        state.errorStatus ?? '',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.red,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
-                      )
+                              state.errorStatus ?? '',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.red,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              textAlign: TextAlign.center,
+                            )
                     ],
                   ),
                   const SizedBox(
@@ -129,23 +129,22 @@ class _RegistrationPageState extends State<RegistrationPage> with AuthMixin {
                 ],
               ),
             ),
-            bottomNavigationBar:
-            SafeArea(
+            bottomNavigationBar: SafeArea(
               minimum: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 50,
               ),
               child: CustomButton(
                 onPressed: state.enviable
-                    ? () async {
-                  context.read<AuthBloc>().add(
-                    OnSubmitButtonEvent(
-                      password: password.text,
-                      email: email.text,
-                      name: name.text,
-                    ),
-                  );
-                }
+                    ? () {
+                        context.read<AuthBloc>().add(
+                              OnSubmitButtonEvent(
+                                password: password.text,
+                                email: email.text,
+                                name: name.text,
+                              ),
+                            );
+                      }
                     : null,
                 borderColor: state.enviable
                     ? AppColors.buttonBorderSidedColor
@@ -160,10 +159,10 @@ class _RegistrationPageState extends State<RegistrationPage> with AuthMixin {
       ),
     );
   }
+
   @override
   void dispose() {
     disposeController();
     super.dispose();
   }
 }
-

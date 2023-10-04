@@ -44,4 +44,9 @@ class AppTextStyle {
     fontSize: 14,
     fontWeight: FontWeight.w500,
   );
+  static const timerButton = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 20,
+    color: LightColorTheme.buttonBackgroundColor,
+  );
 }
